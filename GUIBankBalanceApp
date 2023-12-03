@@ -49,6 +49,7 @@ public class GUIBankBalanceApp extends JFrame {
                 	JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Enter a valid number.");
                 }
                 else {
+                	balance -= withdrawAmount;
                     JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Withdrawal Successful!");
                 }{}
             }

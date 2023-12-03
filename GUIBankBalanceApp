@@ -13,6 +13,8 @@ public class GUIBankBalanceApp extends JFrame {
     public GUIBankBalanceApp() {
         setTitle("Bank Balance Application");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+       
+        
         
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -82,7 +84,7 @@ public class GUIBankBalanceApp extends JFrame {
         pack();
         setLocationRelativeTo(null); // Center the frame on the screen
     }
-        private void exitApplication() {
+        private void exitApplication() {	
             int result = JOptionPane.showConfirmDialog(this, "Do you want to exit? Current Balance: $" + balance,
                     "Exit Confirmation", JOptionPane.YES_NO_OPTION);
             if (result == JOptionPane.YES_OPTION) {
@@ -90,15 +92,17 @@ public class GUIBankBalanceApp extends JFrame {
             }
         }
     
-    private double getAmount(String message) {
-        String input = JOptionPane.showInputDialog(this, message);
-        try {
-            return Double.parseDouble(input);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid input.");
-            return 0.0;
+        private double getAmount(String message) {
+            String input = JOptionPane.showInputDialog(this, message);
+            try {
+                if (input == null) {
+                    throw new NullPointerException(); // User clicked 'Cancel' or closed the input dialog
+                }
+                return Double.parseDouble(input);
+            } catch (NumberFormatException | NullPointerException e) {
+                return 0.0;
+            }
         }
-    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

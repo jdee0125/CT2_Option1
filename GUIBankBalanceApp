@@ -1,14 +1,14 @@
+package pack;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUIBankBalanceApp extends JFrame 
+public class GUIBankBalanceApp extends JFrame {
 
     private double balance = 0.0; // Initial balance
 
-    public GUIBankBalanceApp() 
-        setTitle("GUI Bank Balance Application");
+    public GUIBankBalanceApp() {
+        setTitle("Unique Bank Balance Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -16,76 +16,78 @@ public class GUIBankBalanceApp extends JFrame
         // Deposit Tab
         JPanel depositPanel = new JPanel();
         JButton depositButton = new JButton("Deposit");
-        depositPanel.add(new JLabel("Enter Deposit Amount: "));
-        JTextField depositField = new JTextField(10);
-        depositPanel.add(depositField);
+        depositPanel.add(new JLabel(" "));
         depositPanel.add(depositButton);
-        depositButton.addActionListener(new ActionListener() 
+        depositButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
+            public void actionPerformed(ActionEvent e) {
                 double depositAmount = getAmount("Enter deposit amount:");
-                balance = depositAmount;
-                JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Deposit Successful");
-
-        );
+                if (depositAmount <= 0) {
+                JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Enter a valid number.");
+                } else {
+                balance += depositAmount;
+                JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Deposit Successful!");
+                }
+        }});
         tabbedPane.addTab("Deposit", depositPanel);
 
         // Withdraw Tab
         JPanel withdrawPanel = new JPanel();
         JButton withdrawButton = new JButton("Withdraw");
-        withdrawPanel.add(new JLabel("Enter Withdrawal Amount: "));
-        JTextField withdrawField = new JTextField(10);
-        withdrawPanel.add(withdrawField);
+        withdrawPanel.add(new JLabel(" "));
         withdrawPanel.add(withdrawButton);
-        withdrawButton.addActionListener(new ActionListener() 
+        withdrawButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
+            public void actionPerformed(ActionEvent e) {
                 double withdrawAmount = getAmount("Enter withdrawal amount:");
-                if (withdrawAmount > balance) 
-                    JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Insufficient funds");
-                 else 
-                    balance -= withdrawAmount;
-                    JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Withdrawal Successful");
-
-
-        );
+                if (withdrawAmount > balance) {
+                    JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Insufficient funds!");
+                } else if (withdrawAmount <= 0) {
+                	JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Enter a valid number.");
+                }
+                else {
+                    JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Withdrawal Successful!");
+                }{}
+            }
+        });
         tabbedPane.addTab("Withdraw", withdrawPanel);
 
         // Balance Tab
         JPanel balancePanel = new JPanel();
         JButton checkBalanceButton = new JButton("Check Balance");
         balancePanel.add(checkBalanceButton);
-        checkBalanceButton.addActionListener(new ActionListener() 
+        checkBalanceButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
-                JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Current Balance: $"  balance);
-
-        );
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Current Balance: $" + balance);
+            }
+        });
         tabbedPane.addTab("Check Balance", balancePanel);
 
-Add the tabbed pane to the frame
+        // Add the tabbed pane to the frame
         add(tabbedPane);
 
         pack();
         setLocationRelativeTo(null); // Center the frame on the screen
+    }
 
-
-    private double getAmount(String message) 
+    private double getAmount(String message) {
         String input = JOptionPane.showInputDialog(this, message);
-        try 
+        try {
             return Double.parseDouble(input);
-         catch (NumberFormatException e) 
-JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number."
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input.");
             return 0.0;
+        }
+    }
 
-
-
-    public static void main(String[] args) 
-        SwingUtilities.invokeLater(new Runnable() 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run() 
+            public void run() {
                 new GUIBankBalanceApp().setVisible(true);
-
+            }
+        }
         );
-
-
+    }
+}

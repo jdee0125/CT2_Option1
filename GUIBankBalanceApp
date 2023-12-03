@@ -8,7 +8,7 @@ public class GUIBankBalanceApp extends JFrame {
     private double balance = 0.0; // Initial balance
 
     public GUIBankBalanceApp() {
-        setTitle("Unique Bank Balance Application");
+        setTitle("Bank Balance Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTabbedPane tabbedPane = new JTabbedPane();

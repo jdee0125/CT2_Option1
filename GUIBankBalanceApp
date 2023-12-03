@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("serial")
 public class GUIBankBalanceApp extends JFrame {
 
     private double balance = 0.0; // Initial balance
@@ -62,7 +63,7 @@ public class GUIBankBalanceApp extends JFrame {
                 JOptionPane.showMessageDialog(GUIBankBalanceApp.this, "Current Balance: $" + balance);
             }
         });
-        tabbedPane.addTab("Check Balance", balancePanel);
+        tabbedPane.addTab("    Check Balance   ", balancePanel);
 
         // Add the tabbed pane to the frame
         add(tabbedPane);
